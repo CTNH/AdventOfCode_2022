@@ -37,16 +37,21 @@ int main(int argc, char const *argv[]) {
 
     // Procedures begin at 10
     for (int i = 10; i < lines; i++) {
-        char**tmp = strSplit(input[i], "from");
-        char* str = malloc((strlen(tmp[0])-3) * sizeof(char));
-        for (int j = 0; j < strlen(tmp[0])-3; j++) {
-            str[j] = tmp[0][j+3];
-        }
+        char** tmp = strSplit(input[i], "from");
 
-        int move = strtol(str, NULL, 10);
+        // Remove "move " from the string
+        char* moveStr = malloc((strlen(tmp[0])-5) * sizeof(char));
+        for (int j = 0; j < strlen(tmp[0])-5; j++) {
+            moveStr[j] = tmp[0][j+5];
+        }
+        moveStr[strlen(tmp[0])-6] = '\0';   // Terminate string
+        int move = strtol(moveStr, NULL, 10);
+
+        tmp = strSplit(tmp[1], "to");
         // Arrays starts from 0 -> -1
-        int from = strtol(tmp[1], NULL, 10) - 1;
-        int to = strtol(tmp[2], NULL, 10) - 1;
+        int from = strtol(tmp[0], NULL, 10) - 1;
+        int to = strtol(tmp[1], NULL, 10) - 1;
+
 
         for (int j = 0; j < move; j++) {
             stackPtr[to]++;
@@ -78,15 +83,21 @@ int main(int argc, char const *argv[]) {
     }
 
     for (int i = 10; i < lines; i++) {
-        char**tmp = strSplit(input[i], "from");
-        char* str = malloc((strlen(tmp[0])-3) * sizeof(char));
-        for (int j = 0; j < strlen(tmp[0])-3; j++) {
-            str[j] = tmp[0][j+3];
-        }
+        char** tmp = strSplit(input[i], "from");
 
-        int move = strtol(str, NULL, 10);
-        int from = strtol(tmp[1], NULL, 10) - 1;
-        int to = strtol(tmp[2], NULL, 10) - 1;
+        // Remove "move " from the string
+        char* moveStr = malloc((strlen(tmp[0])-5) * sizeof(char));
+        for (int j = 0; j < strlen(tmp[0])-5; j++) {
+            moveStr[j] = tmp[0][j+5];
+        }
+        moveStr[strlen(tmp[0])-6] = '\0';   // Terminate string
+        int move = strtol(moveStr, NULL, 10);
+
+        tmp = strSplit(tmp[1], "to");
+        // Arrays starts from 0 -> -1
+        int from = strtol(tmp[0], NULL, 10) - 1;
+        int to = strtol(tmp[1], NULL, 10) - 1;
+
 
         stackPtr[to] += move;
         stack[to] = realloc(stack[to], (stackPtr[to]+1) * sizeof(char));
