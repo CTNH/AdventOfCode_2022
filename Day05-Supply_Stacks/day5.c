@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../C/MyLib/mylib_file.h"
-#include "../../C/MyLib/mylib_string.h"
+#include "../C_BasicLib/basiclib_file.h"
+#include "../C_BasicLib/basiclib_string.h"
 
 int main(int argc, char const *argv[]) {
     char** input = readFileByLine("input");

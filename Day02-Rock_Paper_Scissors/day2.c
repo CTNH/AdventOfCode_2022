@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "../../C/MyLib/mylib_file.h"
+#include "../C_BasicLib/basiclib_file.h"
 
 // Part 1
 // A for Rock, B for Paper, and C for Scissors
