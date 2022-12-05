@@ -19,11 +19,12 @@ int main(int argc, char const *argv[]) {
         long start[2], end[2];
         for (int j = 0; j < 2; j++) {
             char** tmp = strSplit(elf[j], "-");
-
-            char* str;
-            start[j] = strtol(tmp[0], &str, 10);
-            end[j] = strtol(tmp[1], &str, 10);
+            // Convert string to long
+            start[j] = strtol(tmp[0], NULL, 10);
+            end[j] = strtol(tmp[1], NULL, 10);
+            free(tmp);
         }
+        free(elf);
 
         // Part one - Check if pairs are fully contained
         for (int j = 0; j < 2; j++) {
@@ -35,7 +36,7 @@ int main(int argc, char const *argv[]) {
             }
         }
 
-        // Part Two
+        // Part Two - Check if pairs overlap at all
         for (int j = 0; j < 2; j++) {
             if ((start[j] <= end[1-j] && start[j] >= start[1-j]) || (end[j] <= end[1-j] && end[j] >= start[1-j])) {
                 overlap++;
